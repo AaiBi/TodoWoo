@@ -1,0 +1,24 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<ul>
+    {% if todos %}
+        <h1 style="text-align:center; color: #ca6f1e; margin-bottom: 40px;"><b>{{ todos.count }} Completed Todo{{ todos.count|pluralize }}</b></h1>
+    {% endif %}
+
+    {% if todos %}
+        {% for todo in todos %}
+            <a href="{% url 'views_todos' todo.id %}" style="text-decoration: none;">
+                <li class="list-group-item list-group-item-primary" style="color: black; margin-top:10px; word-wrap: break-word;">
+                    {{ todo.title }}
+                </li>
+            </a>
+        {% endfor %}
+    {% else %}
+        <div class="text-center">
+            <h2>Looks like, you don't have Todos completed</h2>
+        </div>
+    {% endif %}
+</ul>
+
+{% endblock %}

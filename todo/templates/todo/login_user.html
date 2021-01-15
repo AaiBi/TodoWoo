@@ -1,0 +1,29 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+    <h1><center><b style="color: #ca6f1e;">Login</b></center></h1>
+    {% if error %}
+        <div class="alert alert-danger" role="alert" style="margin-top:20px; margin-bottom:20px;">
+            {{ error }}
+        </div>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="password">
+        </div>
+
+        <div class="text-center">
+            Need an account? <a href="{% url 'sign_up_user' %}">Sign Up here</a>
+        </div>
+        <center>
+            <button type="submit" class="btn btn-primary" style="margin-top:20px;">Login</button>
+        </center>
+    </form>
+
+{% endblock %}

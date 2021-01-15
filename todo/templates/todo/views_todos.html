@@ -1,0 +1,49 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+    <li class="list-group-item list-group-item-primary" style="color: black; margin-top:10px; margin-bottom:30px; word-wrap: break-word;">
+        <center><b>{{ todo.title }}</b></center>
+    </li>
+
+     <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" id="title" value="{{ todo.title }}" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="memo">Memo</label>
+            <textarea name="memo" class="form-control" id="memo" >{{ todo.memo }}</textarea>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" name="important" class="form-check-input" id="important" {% if todo.important %}checked{% endif %}>
+            <label class="form-check-label" for="important">Important</label>
+        </div>
+        <div class="row" style="margin-top:30px;">
+            <div class="col-sm-4">
+                <center>
+
+                </center>
+            </div>
+            <div class="col-sm-4">
+                <center>
+                    <form method="POST" action="{% url 'complete_todos' todo.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">complete</button>
+                    </form>
+                </center>
+            </div>
+            <div class="col-sm-4">
+                <center>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </center>
+            </div>
+        </div>
+    </form>
+ <form method="POST" action="{% url 'delete_todos' todo.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">delete</button>
+                    </form>
+{% endblock %}
+

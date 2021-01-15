@@ -1,0 +1,36 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+    <h1><center><b style="color: #ca6f1e;">Sign Up</b></center></h1>
+    {% if error %}
+        <div class="alert alert-danger" role="alert" style="margin-top:20px; margin-bottom:20px;">
+            {{ error }}
+        </div>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">
+                Your username must be unique. We'll let you know if someone has taken it already
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="password1" class="form-label">Password</label>
+            <input type="password" name="password1" class="form-control" id="password1">
+        </div>
+        <div class="mb-3">
+            <label for="password2" class="form-label">Confirm Password</label>
+            <input type="password" name="password2" class="form-control" id="password2">
+        </div>
+        <div class="text-center">
+            Do you already have an account? <a href="{% url 'login_user' %}">Login here</a>
+        </div>
+        <center>
+            <button type="submit" class="btn btn-primary" style="margin-top:20px;">Submit</button>
+        </center>
+    </form>
+
+{% endblock %}
+
